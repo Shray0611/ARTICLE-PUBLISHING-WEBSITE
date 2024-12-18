@@ -87,6 +87,13 @@ app.get("/articles", async (req, res) => {
   res.send(result);
 });
 
+app.get("/article/:id", async (req,res) => {
+  console.log(req.params.id);
+  
+  let result = await Article.findOne({_id: req.params.id});
+  res.send(result);
+})
+
 app.listen(5000, () => {
   console.log("Server is running on port 5000");
 });

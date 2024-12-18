@@ -54,7 +54,7 @@ const Articles = () => {
         <div className="p-6 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 min-h-screen">
             <ArticleHero />
             <ScrollableNavbar setSelectedSection={setSelectedSection} />
-
+            <div className='max-w-6xl w-full mx-auto'>
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-10">
                 {filteredArticles.map(article => (
                     <div 
@@ -67,7 +67,7 @@ const Articles = () => {
                             </h2>
                             <div dangerouslySetInnerHTML={{ __html: article.content.slice(0, 300) + '...' }} />
                             <button
-                                onClick={() => navigate(`/article/${article._id}`)}
+                                onClick={() => navigate(`/viewarticle/${article._id}`)}
                                 className="absolute bottom-4 right-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-5 py-2 rounded-full shadow-md hover:shadow-lg hover:from-purple-600 hover:to-pink-600 transition"
                             >
                                 Read More
@@ -75,6 +75,7 @@ const Articles = () => {
                         </div>
                     </div>
                 ))}
+            </div>
             </div>
         </div>
     );
