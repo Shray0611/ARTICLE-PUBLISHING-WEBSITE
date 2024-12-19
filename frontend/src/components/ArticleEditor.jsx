@@ -1,6 +1,7 @@
-import React, { useState, useRef, useMemo } from "react";
+import React, { useState, useRef, useMemo, useEffect } from "react";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
+import { useNavigate } from "react-router-dom";
 
 const ArticleEditor = () => {
   const [title, setTitle] = useState("");
@@ -11,7 +12,7 @@ const ArticleEditor = () => {
   const [content, setContent] = useState("");
   const [coverPhoto, setCoverPhoto] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-
+  const navigate = useNavigate();
   const quillRef = useRef(null);
 
   const modules = useMemo(
@@ -36,6 +37,12 @@ const ArticleEditor = () => {
     }),
     []
   );
+
+  useEffect(()=>{
+    if(!localStorage.getItem("user")){
+      navigate('/signin');
+    }
+  }, [])
 
   async function handleImageInsert() {
     const input = document.createElement("input");
