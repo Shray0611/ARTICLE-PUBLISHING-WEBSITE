@@ -13,6 +13,8 @@ const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(cors());
 
+const jwtKey = 'myKey';
+
 app.post('/register', async(req,res) => {
   const {name, authorName, email, password} = req.body
   try {
@@ -21,11 +23,11 @@ app.post('/register', async(req,res) => {
     result = result.toObject();
 
     delete result.password;
-    jwt.sign({result}, jwtKey, {expiresIn:'7d'},(err,token)=>{
+    jwt.sign({userId: user._id}, jwtKey, {expiresIn:'7d'},(err,token)=>{
       if(err){
         return res.status(400).json({error: `Something went wrong + ${err}`})
       }
-      res.send({result, auth:token});
+      res.send({user, auth:token});
     });
     console.log(result);
   } catch (error) {
@@ -34,12 +36,12 @@ app.post('/register', async(req,res) => {
 })
 
 app.post('/login', async(req,res) => {
-  const {email,password} = req.body();
+  const {email,password} = req.body;
   try {
     if(email && password){
       let user = await User.findOne({email: email, password: password}).select('-password');
       if(user){
-        jwt.sign({user}, jwtKey, {expiresIn: 7d}, (err,token) => {
+        jwt.sign({userId: user._id}, jwtKey, {expiresIn: '7d'}, (err,token) => {
           if(err) {
             return res.status(400).json({error: `SOmething went wrong: ${err}`})
           }
