@@ -3,7 +3,7 @@ import Navbar from './components/Navbar';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Articles from './components/Articles';
 import ArticleEditor from './components/ArticleEditor';
-import ViewArticle from './components/viewArticle';
+import ViewArticle from './components/ViewArticle';
 import Login from './components/Login';
 import SignUp from './components/SignUp';
 
