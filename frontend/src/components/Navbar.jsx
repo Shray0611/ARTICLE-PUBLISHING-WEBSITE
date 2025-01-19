@@ -16,7 +16,7 @@ const Navbar = () => {
         {/* Logo Section */}
         <Link to={"/"}>
         <div className="flex items-center" >
-          <img src={logo} alt="Logo" className="h-[150px] w-[150px]"/>
+          <h1>EasyArticles</h1>
         </div>
         </Link>
         {/* Signup/Login Button */}

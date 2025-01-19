@@ -4,8 +4,7 @@ import { useNavigate } from "react-router-dom";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [emailError, setEmailError] = useState("");
-  const [passwordError, setPasswordError] = useState("");
+  const [error, setError] = useState(false);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -14,35 +13,29 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Reset errors
-    setEmailError("");
-    setPasswordError("");
-
-    if (!email) {
-      setEmailError("Please enter a valid email.");
+    if (!email || !password) {
+      setError(true);
     }
-
-    if (!password) {
-      setPasswordError("Please enter your password.");
-    }
-
-    if (email === "iamanauthor@creative" && password === "article") {
-      const user = { email };
-      localStorage.setItem("user", JSON.stringify(user));
-      navigate("/createarticle");
-    } else {
-      if (!email || email !== "iamanauthor@creative") {
-        setEmailError("Invalid email address.");
+    let user = await fetch("http://localhost:5000/login", {
+      method:"post",
+      body:JSON.stringify({email,password}),
+      headers:{
+          "Content-Type":"application/json"
       }
-      if (!password || password !== "article") {
-        setPasswordError("Invalid password.");
-      }
-      setEmail("");
-      setPassword("");
-    }
+  });
+  user = await user.json();
+  console.log(user);
+  
+  if(user.auth){
+      localStorage.setItem("user", JSON.stringify(user.user));
+      localStorage.setItem("token", JSON.stringify(user.auth));
+      navigate("/");
+  } else{
+      alert("Enter correct details");
+  }
   };
 
   return (
@@ -67,9 +60,7 @@ const Login = () => {
               className="w-full px-4 py-2 text-gray-700 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="iamanauthor@creative"
             />
-            {emailError && (
-              <p className="mt-2 text-sm text-red-600">{emailError}</p>
-            )}
+            <span className="mt-2 text-sm text-red-600">{error && !email && <p>Enter valid email!!</p>}</span>
           </div>
           <div className="mb-6">
             <label
@@ -86,9 +77,7 @@ const Login = () => {
               className="w-full px-4 py-2 text-gray-700 bg-gray-50 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
               placeholder="article"
             />
-            {passwordError && (
-              <p className="mt-2 text-sm text-red-600">{passwordError}</p>
-            )}
+            <span className="mt-2 text-sm text-red-600">{error && !password && <p>Enter valid password!!</p>}</span>
           </div>
           <button
             type="submit"

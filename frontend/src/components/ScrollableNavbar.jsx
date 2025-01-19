@@ -28,7 +28,7 @@ const ScrollableNavbar = ({ setSelectedSection }) => {
                             selectedButton === index
                                 ? "border-2 border-blue-500"
                                 : ""
-                        } bg-white bg-opacity-50 hover:bg-opacity-75 text-black py-2 px-4 rounded transition-all duration-200`}
+                        } bg-white bg-opacity-50 hover:bg-opacity-75 text-black py-2 px-4 rounded transition-all duration-200 w-30 h-30`}
                     >
                         {text}
                     </button>

@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+import mongoose from "mongoose";
 
 const articleSchema = new mongoose.Schema({
   title: { type: String, required: true },
@@ -8,6 +8,7 @@ const articleSchema = new mongoose.Schema({
   section: { type: String },
   designer: { type: String },
   coverphoto: { type: String },
-},{timestamps:true});
+},);
 
-module.exports = mongoose.model('Article', articleSchema);
+const Article = mongoose.model('Article', articleSchema);
+export default Article;

@@ -1,13 +1,13 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const jwt = require('jsonwebtoken');
-const multer = require("multer");
-const path = require("path");
-const cors = require("cors");
-const User = require("./models/User")
-require("./db/config"); 
-const Article = require("./models/Article"); 
-const Photo = require("./models/Photos");
+import express from "express";
+import mongoose from "mongoose";
+import jwt from 'jsonwebtoken';
+import multer from "multer";
+import path from "path";
+import cors from "cors";
+import User from './models/User.js'
+import './db/config.js'
+import Article from "./models/Article.js"; 
+import Photo from "./models/Photos.js";
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
@@ -43,12 +43,26 @@ app.post('/login', async(req,res) => {
       if(user){
         jwt.sign({userId: user._id}, jwtKey, {expiresIn: '7d'}, (err,token) => {
           if(err) {
-            return res.status(400).json({error: `SOmething went wrong: ${err}`})
+            return res.status(400).json({error: `Something went wrong: ${err}`})
           }
           res.send({user, auth:token});
         })
       }
     }
+  } catch (error) {
+    return res.status(500).json({error: `Internal Server Error: ${error}`})
+  }
+})
+
+app.put("/update-article", async(req,res) => {
+  try {
+    const articleId = req.params.id;
+    const article = await Article.findByIdAndUpdate({
+      _id: articleId
+    },{
+      $set: req.body
+    })
+    res.send(article);
   } catch (error) {
     return res.status(500).json({error: `Internal Server Error: ${error}`})
   }
