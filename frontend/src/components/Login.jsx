@@ -8,7 +8,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (localStorage.getItem("user")) {
+    if (localStorage.getItem("token")) {
       navigate("/createarticle");
     }
   }, [navigate]);
@@ -37,6 +37,10 @@ const Login = () => {
       alert("Enter correct details");
   }
   };
+
+  const notregister = () => {
+    
+  }
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-gray-100">
@@ -86,6 +90,12 @@ const Login = () => {
             Sign In
           </button>
         </form>
+        <button
+            className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500"
+            onClick={notregister}
+          >
+            Not Registered?
+          </button>
       </div>
     </div>
   );

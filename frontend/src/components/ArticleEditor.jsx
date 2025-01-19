@@ -39,10 +39,11 @@ const ArticleEditor = () => {
   );
 
   useEffect(()=>{
-    if(!localStorage.getItem("auth")){
+    const auth = localStorage.getItem("token");
+    if(!auth){
       navigate('/signin');
     }
-  }, [])
+  }, [navigate])
 
   async function handleImageInsert() {
     const input = document.createElement("input");

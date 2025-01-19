@@ -1,8 +1,7 @@
-import React from 'react';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export default Signup = () =>{
+const SignUp = () =>{
     const [name,setName] = useState("");
     const [authorName,setAuthorName] = useState("");
     const [email, setEmail] = useState("");
@@ -121,3 +120,4 @@ export default Signup = () =>{
     </div>
     )
 }
+export default SignUp;

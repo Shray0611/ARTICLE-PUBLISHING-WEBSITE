@@ -9,7 +9,21 @@ const Navbar = () => {
     setIsMobileMenuOpen(!isMobileMenuOpen);
   };
 
-  const auth = localStorage.getItem("user");
+  const auth = JSON.parse(localStorage.getItem("user"));
+
+  const logout = () => {
+    // Remove items from localStorage
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+
+    // Check if the items were successfully removed
+    if (!localStorage.getItem("user") && !localStorage.getItem("token")) {
+        alert("Logout Successfully!!");
+    } else {
+        alert("Error logging out. Please try again.");
+    }
+  }
+  
   return (
     <nav className="bg-gray-800 text-white shadow-lg">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
@@ -34,7 +48,16 @@ const Navbar = () => {
             >
               Signup/Login
             </Link>
-          </li> : <h1>Hello, Author</h1> }
+          </li> : 
+          <li>
+          <Link
+              to="/signin"
+              className="bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200 ease-in-out"
+              onClick={logout}
+            >
+              Logout {auth.name}
+            </Link></li>
+          }
         </ul>
         {/* Mobile Menu Button */}
         <button
@@ -64,36 +87,31 @@ const Navbar = () => {
           <ul className="flex flex-col space-y-4 py-4 px-4">
             <li>
               <Link
-                to="/"
+                to="/create-article"
                 className="block text-gray-200 hover:text-white transition duration-200"
               >
-                Articles
+                Create Articles
               </Link>
             </li>
-            <li>
+            
+            {!auth?
+              <li>
               <Link
-                to="/magazines"
-                className="block text-gray-200 hover:text-white transition duration-200"
-              >
-                Magazines
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/achievements"
-                className="block text-gray-200 hover:text-white transition duration-200"
-              >
-                VC Exclusives
-              </Link>
-            </li>
-            <li>
-              <Link
-                to="/signup"
+                to="/signin"
                 className="block bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200"
               >
-                Login
+                Login/SignUp
+              </Link>
+            </li> : <li>
+              <Link
+                to="/logout"
+                className="block bg-blue-600 hover:bg-blue-700 text-white py-2 px-4 rounded transition duration-200"
+                onClick={logout}
+              >
+                Logout {auth.name}
               </Link>
             </li>
+            }
           </ul>
         </div>
       )}
