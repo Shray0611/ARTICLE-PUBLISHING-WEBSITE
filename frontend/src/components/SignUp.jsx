@@ -18,7 +18,7 @@ const SignUp = () =>{
   const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
 
   const signup = async () => {
-    let result = await fetch(`${baseURL}/register`, {
+    let result = await fetch(`http://localhost:5000/register`, {
         method:"post",
         body:JSON.stringify({name, authorName, email, password}),
         headers:{

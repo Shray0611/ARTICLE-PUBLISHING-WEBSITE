@@ -21,7 +21,7 @@ const Login = () => {
     if (!email || !password) {
       setError(true);
     }
-    let user = await fetch(`${baseURL}/login`, {
+    let user = await fetch(`http://localhost:5000/login`, {
       method:"post",
       body:JSON.stringify({email,password}),
       headers:{
