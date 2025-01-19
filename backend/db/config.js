@@ -1,5 +1,8 @@
 import mongoose from "mongoose";
-mongoose.connect('mongodb://localhost:27017/VESITConnect', {
+import dotenv from "dotenv";
+dotenv.config()
+const dbURL = process.env.MONGO_URI;
+mongoose.connect(dbURL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
 })

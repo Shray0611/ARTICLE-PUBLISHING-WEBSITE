@@ -8,12 +8,16 @@ import User from './models/User.js'
 import './db/config.js'
 import Article from "./models/Article.js"; 
 import Photo from "./models/Photos.js";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(cors());
 
-const jwtKey = 'myKey';
+const jwtKey = process.env.JWTSECRET;
+const PORT = process.env.PORT;
 
 app.post('/register', async(req,res) => {
   const {name, authorName, email, password} = req.body
@@ -152,6 +156,6 @@ app.get("/article/:id", async (req,res) => {
   res.send(result);
 })
 
-app.listen(5000, () => {
-  console.log("Server is running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
 });
