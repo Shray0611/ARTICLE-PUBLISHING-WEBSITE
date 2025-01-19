@@ -5,6 +5,7 @@ import Articles from './components/Articles';
 import ArticleEditor from './components/ArticleEditor';
 import ViewArticle from './components/viewArticle';
 import Login from './components/Login';
+import SignUp from './components/SignUp';
 
 const App = () => {
     return(
@@ -16,6 +17,7 @@ const App = () => {
         <Route path='/createarticle' element={<ArticleEditor />}></Route>
         <Route path='/viewarticle/:id' element={<ViewArticle/>}></Route>
         <Route path='/signin' element={<Login />}></Route>
+        <Route path='/signup' element={<SignUp />}></Route>
         </Routes>
         </BrowserRouter>
         </div>

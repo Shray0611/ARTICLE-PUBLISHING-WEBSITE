@@ -2,7 +2,7 @@ import React from 'react';
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-export const Signup = () =>{
+export default Signup = () =>{
     const [name,setName] = useState("");
     const [authorName,setAuthorName] = useState("");
     const [email, setEmail] = useState("");

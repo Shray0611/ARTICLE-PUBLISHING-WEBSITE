@@ -8,6 +8,7 @@ const articleSchema = new mongoose.Schema({
   section: { type: String },
   designer: { type: String },
   coverphoto: { type: String },
+  userId: {type: String},
 },);
 
 const Article = mongoose.model('Article', articleSchema);

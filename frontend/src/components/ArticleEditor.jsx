@@ -39,7 +39,7 @@ const ArticleEditor = () => {
   );
 
   useEffect(()=>{
-    if(!localStorage.getItem("user")){
+    if(!localStorage.getItem("auth")){
       navigate('/signin');
     }
   }, [])
@@ -111,6 +111,9 @@ const ArticleEditor = () => {
     // formData.append("section", section);
     // formData.append("designer", designer);
     try {
+      const user =  JSON.parse(localStorage.getItem("user"));
+      const userId = user._id;
+
       const response = await fetch("http://localhost:5000/articles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -122,6 +125,7 @@ const ArticleEditor = () => {
           designer,
           content,
           coverphoto: coverPhoto,
+          userId,
         }),
       });
       console.log(
@@ -131,7 +135,8 @@ const ArticleEditor = () => {
         section,
         designer,
         content,
-        coverPhoto
+        coverPhoto,
+        userId
       );
 
       if (response.ok) {
@@ -222,13 +227,20 @@ const ArticleEditor = () => {
             >
               Section
             </label>
-            <input
-              type="text"
+            <select
               id="section"
               value={section}
               onChange={(e) => setSection(e.target.value)}
               className="mt-1 p-3 block w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500"
-            />
+            >
+              <option value="" disabled>Select a section</option>
+              <option value="achievements">Achievements</option>
+              <option value="tech-upskilling">Tech-Upskilling</option>
+              <option value="tech-competitions">Tech-Competitions</option>
+              <option value="extracurriculars">Extracurriculars</option>
+              <option value="my society, my responsibility">My Society, My Responsibility</option>
+              <option value="featured">Featured</option>
+            </select>
           </div>
 
           {/* Designer */}

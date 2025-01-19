@@ -54,19 +54,19 @@ app.post('/login', async(req,res) => {
   }
 })
 
-app.put("/update-article", async(req,res) => {
-  try {
-    const articleId = req.params.id;
-    const article = await Article.findByIdAndUpdate({
-      _id: articleId
-    },{
-      $set: req.body
-    })
-    res.send(article);
-  } catch (error) {
-    return res.status(500).json({error: `Internal Server Error: ${error}`})
-  }
-})
+// app.put("/update-article/:id", async(req,res) => {
+//   try {
+//     const articleId = req.params.id;
+//     const article = await Article.findByIdAndUpdate({
+//       _id: articleId
+//     },{
+//       $set: req.body
+//     })
+//     res.send(article);
+//   } catch (error) {
+//     return res.status(500).json({error: `Internal Server Error: ${error}`})
+//   }
+// })
 
 const storage = multer.memoryStorage();
 const upload = multer({
@@ -99,7 +99,7 @@ app.post('/upload-image', upload.single('image'), async (req, res) => {
 
 app.post("/articles", async (req, res) => {
   try {
-    const { title, author, content, council, section, designer, coverphoto } = req.body;
+    const { title, author, content, council, section, designer, coverphoto, userId} = req.body;
 
     if (!title || !author || !content) {
       return res.status(400).json({ error: "Title, author, and content are required" });
@@ -113,6 +113,7 @@ app.post("/articles", async (req, res) => {
       section,
       designer,
       coverphoto,
+      userId,
     });
 
     const savedArticle = await newArticle.save();
