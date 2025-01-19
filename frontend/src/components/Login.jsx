@@ -13,13 +13,15 @@ const Login = () => {
     }
   }, [navigate]);
 
+  const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     if (!email || !password) {
       setError(true);
     }
-    let user = await fetch("http://localhost:5000/login", {
+    let user = await fetch(`${baseURL}/login`, {
       method:"post",
       body:JSON.stringify({email,password}),
       headers:{
@@ -39,7 +41,7 @@ const Login = () => {
   };
 
   const notregister = () => {
-    
+    navigate("/signup")
   }
 
   return (
@@ -85,7 +87,7 @@ const Login = () => {
           </div>
           <button
             type="submit"
-            className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500"
+            className="w-full mt-5 px-4 py-2 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500"
           >
             Sign In
           </button>

@@ -69,9 +69,11 @@ const ArticleEditor = () => {
           body: formData,
         });
 
+        const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
+
         if (response.ok) {
           const { _id } = await response.json();
-          const imageUrl = `http://localhost:5000/get-image/${_id}`;
+          const imageUrl = `${baseURL}/get-image/${_id}`;
           console.log(imageUrl);
 
           const quill = quillRef.current?.getEditor();
