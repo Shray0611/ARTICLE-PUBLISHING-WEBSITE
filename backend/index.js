@@ -1,15 +1,56 @@
 const express = require("express");
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
 const multer = require("multer");
 const path = require("path");
 const cors = require("cors");
-require("./db/config"); // Ensure this file sets up the database connection
-const Article = require("./db/Article"); // Ensure this path is correct
-const Photo = require("./db/Photos");
+const User = require("./models/User")
+require("./db/config"); 
+const Article = require("./models/Article"); 
+const Photo = require("./models/Photos");
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
 app.use(cors());
+
+app.post('/register', async(req,res) => {
+  const {name, authorName, email, password} = req.body
+  try {
+    let user = new User(req.body);
+    let result = await user.save();
+    result = result.toObject();
+
+    delete result.password;
+    jwt.sign({result}, jwtKey, {expiresIn:'7d'},(err,token)=>{
+      if(err){
+        return res.status(400).json({error: `Something went wrong + ${err}`})
+      }
+      res.send({result, auth:token});
+    });
+    console.log(result);
+  } catch (error) {
+    return res.status(500).json({error: 'Internal Server Error'})
+  }
+})
+
+app.post('/login', async(req,res) => {
+  const {email,password} = req.body();
+  try {
+    if(email && password){
+      let user = await User.findOne({email: email, password: password}).select('-password');
+      if(user){
+        jwt.sign({user}, jwtKey, {expiresIn: 7d}, (err,token) => {
+          if(err) {
+            return res.status(400).json({error: `SOmething went wrong: ${err}`})
+          }
+          res.send({user, auth:token});
+        })
+      }
+    }
+  } catch (error) {
+    return res.status(500).json({error: `Internal Server Error: ${error}`})
+  }
+})
 
 const storage = multer.memoryStorage();
 const upload = multer({
