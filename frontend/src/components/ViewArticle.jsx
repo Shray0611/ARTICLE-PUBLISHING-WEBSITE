@@ -11,8 +11,8 @@ const ViewArticle = () => {
 
   const getArticleById = async () => {
     try {
-      const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
-      const response = await fetch(`http://localhost:5000/article/${id}`);
+      const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
+      const response = await fetch(`${baseURL}/article/${id}`);
       const data = await response.json();
       setArticle(data);
     } catch (error) {

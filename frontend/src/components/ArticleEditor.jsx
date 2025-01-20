@@ -62,18 +62,19 @@ const ArticleEditor = () => {
 
       const formData = new FormData();
       formData.append("image", file);
+      
+      const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
 
       try {
-        const response = await fetch("http://localhost:5000/upload-image", {
+        const response = await fetch(`${baseURL}/upload-image`, {
           method: "POST",
           body: formData,
         });
 
-        const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
-
+        
         if (response.ok) {
           const { _id } = await response.json();
-          const imageUrl = `http://localhost:5000/get-image/${_id}`;
+          const imageUrl = `${baseURL}/get-image/${_id}`;
           console.log(imageUrl);
 
           const quill = quillRef.current?.getEditor();
