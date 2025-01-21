@@ -21,6 +21,8 @@ const Login = () => {
     if (!email || !password) {
       setError(true);
     }
+    console.log(`${baseURL}/login`);
+    
     let user = await fetch(`${baseURL}/login`, {
       method:"post",
       body:JSON.stringify({email,password}),
