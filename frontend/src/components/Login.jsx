@@ -93,7 +93,7 @@ const Login = () => {
           </button>
         </form>
         <button
-            className="w-full px-4 py-2 font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-4 focus:ring-blue-500"
+            className="w-full mt-5 px-4 py-2 font-medium text-red bg-blue-600 rounded-lg hover:bg-blue-700 focus:outline-none hover:text-white focus:ring-4 focus:ring-blue-500"
             onClick={notregister}
           >
             Not Registered?

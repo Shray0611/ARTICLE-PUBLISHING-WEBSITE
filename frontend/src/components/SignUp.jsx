@@ -6,7 +6,7 @@ const SignUp = () =>{
     const [authorName,setAuthorName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [error, setError] = useState(true);
+    const [error, setError] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -18,6 +18,10 @@ const SignUp = () =>{
   const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
 
   const signup = async () => {
+    if(!name || !authorName || !email || !password) {
+      setError(true);
+      return false;
+    }
     let result = await fetch(`${baseURL}/register`, {
         method:"post",
         body:JSON.stringify({name, authorName, email, password}),
