@@ -64,7 +64,7 @@ const ArticleEditor = () => {
       formData.append("image", file);
       
       // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
-      const baseURL = "https://easyarticle.vercel.app/";
+      const baseURL = "https://easyarticle.vercel.app";
 
       try {
         const response = await fetch(`${baseURL}/upload-image`, {
@@ -119,7 +119,7 @@ const ArticleEditor = () => {
       const user =  JSON.parse(localStorage.getItem("user"));
       const userId = user._id;
 
-      const response = await fetch("http://localhost:5000/articles", {
+      const response = await fetch("https://easyarticle.vercel.app/articles", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
