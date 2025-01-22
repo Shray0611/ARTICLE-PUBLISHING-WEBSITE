@@ -21,7 +21,7 @@ const ArticleHero = () => {
   const getHeroArticles = async () => {
     try {
       // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
-      const baseURL = ""
+      const baseURL = "https://easyarticle.vercel.app"
       const response = await fetch(`${baseURL}/articles`);
       const data = await response.json();
       const filteredData = data.filter(
