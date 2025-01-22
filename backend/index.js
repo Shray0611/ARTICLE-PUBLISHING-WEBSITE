@@ -16,7 +16,10 @@ const __dirname = path.resolve()
 
 const app = express();
 app.use(express.json({ limit: "50mb" }));
-app.use(cors());
+app.use(cors({
+    origin:"https://easyarticles.vercel.app",
+    credentials:true,
+}))
 
 const jwtKey = process.env.JWTSECRET;
 const PORT = process.env.PORT;
