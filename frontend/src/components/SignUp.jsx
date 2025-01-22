@@ -15,9 +15,10 @@ const SignUp = () =>{
     }
   }, [navigate]);
 
-  const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
+  // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
 
   const signup = async () => {
+    const baseURL = "";
     if(!name || !authorName || !email || !password) {
       setError(true);
       return false;

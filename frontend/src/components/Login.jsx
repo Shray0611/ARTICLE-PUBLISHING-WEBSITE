@@ -13,10 +13,11 @@ const Login = () => {
     }
   }, [navigate]);
 
-  const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
+  // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const baseURL="";
 
     if (!email || !password) {
       setError(true);

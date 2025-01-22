@@ -63,7 +63,8 @@ const ArticleEditor = () => {
       const formData = new FormData();
       formData.append("image", file);
       
-      const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
+      // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "/";
+      const baseURL = ""
 
       try {
         const response = await fetch(`${baseURL}/upload-image`, {

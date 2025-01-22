@@ -16,7 +16,8 @@ const Articles = () => {
 
     const getArticles = async () => {
         try {
-            const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
+            // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
+            const baseURL = "";
             console.log(`${baseURL}/articles`);
             
             const response = await fetch(`${baseURL}/articles`);
@@ -44,14 +45,6 @@ const Articles = () => {
     if (error) {
         return <div className="text-center mt-10 text-lg text-red-600">Error: {error}</div>;
     }
-
-    // if (filteredArticles.length === 0) {
-    //     return (
-    //         <div className="text-center mt-10 text-lg">
-    //             No articles found for the selected section.
-    //         </div>
-    //     );
-    // }
 
     return (
         <div className="p-6 bg-gradient-to-r from-blue-100 via-purple-100 to-pink-100 min-h-screen">
