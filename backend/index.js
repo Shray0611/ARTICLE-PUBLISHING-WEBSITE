@@ -21,6 +21,10 @@ app.use(cors());
 const jwtKey = process.env.JWTSECRET;
 const PORT = process.env.PORT;
 
+app.get("/", async(req,res)=>{
+  res.send("Hello")
+})
+
 app.post('/register', async(req,res) => {
   const {name, authorName, email, password} = req.body
   try {
