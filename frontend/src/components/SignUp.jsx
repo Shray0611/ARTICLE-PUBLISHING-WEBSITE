@@ -18,7 +18,7 @@ const SignUp = () =>{
   // const baseURL = import.meta.env.MODE === 'development' ? "http://localhost:5000" : "";
 
   const signup = async () => {
-    const baseURL = "";
+    const baseURL = "https://easyarticle.vercel.app";
     if(!name || !authorName || !email || !password) {
       setError(true);
       return false;
