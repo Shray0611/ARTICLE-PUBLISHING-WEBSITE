@@ -139,25 +139,26 @@ app.post("/articles", async (req, res) => {
 
 
 app.get('/get-image/:id', async (req, res) => {
-  // try {
-  //   const image = await Photo.findById(req.params.id);
-  //   if (!image) {
-  //     return res.status(404).json({ error: 'Image not found' });
-  //   }
+  try {
+    const image = await Photo.findById(req.params.id);
+    if (!image) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
 
-  //   res.set('Content-Type', image.contentType);
-  //   res.send(image.photo); // Send raw binary data
-  // } catch (error) {
-  //   console.error('Error fetching image:', error);
-  //   res.status(500).json({ error: 'Internal server error' });
-  // }
-    res.send("working bro");
+    res.set('Content-Type', image.contentType);
+    res.send(image.photo); // Send raw binary data
+      console.log("working bro");
+  } catch (error) {
+    console.error('Error fetching image:', error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
 });
 
 app.get("/articles", async (req, res) => {
-  // let result = await Article.find();
-  res.send("working");
-    console.log("hello working");
+    console.log("Fetching articles...");
+    const articles = await Article.find();
+    console.log("Articles fetched:", articles);
+    res.send(articles);
 });
 
 app.get("/article/:id", async (req,res) => {
