@@ -17,7 +17,7 @@ const Login = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const baseURL="";
+    const baseURL="https://easyarticle.vercel.app";
 
     if (!email || !password) {
       setError(true);
