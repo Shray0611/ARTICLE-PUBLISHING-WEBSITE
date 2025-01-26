@@ -87,7 +87,7 @@ const Navbar = () => {
           <ul className="flex flex-col space-y-4 py-4 px-4">
             <li>
               <Link
-                to="/create-article"
+                to="/createarticle"
                 className="block text-gray-200 hover:text-white transition duration-200"
               >
                 Create Articles
