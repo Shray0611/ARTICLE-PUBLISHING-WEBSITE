@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Article Publishing and Viewer Application
 
 This application allows users to view detailed articles with a professional layout. Articles are fetched from a backend API, rendered in the center of the page, and styled beautifully using Tailwind CSS. The application ensures seamless rendering of HTML-formatted content, including images and other media.
@@ -67,3 +68,6 @@ Ensure you have the following installed:
 3. Start the server.
    ```bash
    npm run dev
+=======
+# ARTICLE-PUBLISHING-WEBSITE
+>>>>>>> 6a5ec7fd8873e70311388868810b01643c2271c3
